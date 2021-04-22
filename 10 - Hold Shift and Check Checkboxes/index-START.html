@@ -80,7 +80,7 @@
     <div class="item">
       <input type="checkbox">
       <p>Try to do it without any libraries</p>
-    </div>
+    </div>w
     <div class="item">
       <input type="checkbox">
       <p>Just regular JavaScript</p>
@@ -96,6 +96,31 @@
   </div>
 
 <script>
+  const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+
+  let lastChecked;
+
+  function handleCheck(e) {
+    // Check if they hgad the shift keydown
+    let inBetween = false;
+    if (e.shiftKey && this.checked) {
+      checkboxes.forEach(checkbox => {
+        console.log(checkbox);
+        if (checkbox === this || checkbox === lastChecked) {
+          inBetween  = !inBetween;
+          console.log('Starting to check them inbetween');
+        }
+
+        if(inBetween) {
+          checkbox.checked = true;
+        }
+      })
+    }
+    // And check that they are checking it
+    lastChecked = this;
+  }
+
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
 </script>
 </body>
 </html>
